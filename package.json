@@ -9,16 +9,21 @@
 	"categories": [
 		"Other"
 	],
-	"activationEvents": [
-        "onCommand:joint-js.helloWorld"
-	],
+        "activationEvents": [
+        "onCommand:joint-js.helloWorld",
+        "onCommand:joint-js.showPreview"
+        ],
 	"main": "./extension.js",
 	"contributes": {
-		"commands": [{
+                "commands": [{
             "command": "joint-js.helloWorld",
             "title": "Hello World"
+                },
+                {
+            "command": "joint-js.showPreview",
+            "title": "Show JointJS Preview"
 
-		}]
+                }]
 	},
 	"scripts": {
         "lint": "eslint .",
