@@ -28,7 +28,32 @@ function activate(context) {
             vscode.ViewColumn.Beside,
             { enableScripts: true }
         );
+
+        const updatePreview = (document) => {
+            try {
+                const json = JSON.parse(document.getText());
+                panel.webview.postMessage({ type: 'update', json });
+            } catch (e) {
+                // ignore JSON parse errors
+            }
+        };
+
         panel.webview.html = getWebviewContent();
+
+        const active = vscode.window.activeTextEditor?.document;
+        if (active) {
+            updatePreview(active);
+        }
+
+        const changeSubscription = vscode.workspace.onDidChangeTextDocument(event => {
+            if (panel.visible && active && event.document === active) {
+                updatePreview(event.document);
+            }
+        });
+
+        panel.onDidDispose(() => {
+            changeSubscription.dispose();
+        });
     });
 
     context.subscriptions.push(disposable, previewDisposable);
@@ -58,14 +83,14 @@ function getWebviewContent() {
             gridSize: 10
         });
 
-        const rect = new joint.shapes.standard.Rectangle();
-        rect.position(50, 50);
-        rect.resize(100, 40);
-        rect.attr({
-            body: { fill: 'blue' },
-            label: { text: 'Hello', fill: 'white' }
+        window.addEventListener('message', event => {
+            const { type, json } = event.data;
+            if (type === 'update' && json) {
+                graph.clear();
+                graph.fromJSON(json);
+            }
         });
-        rect.addTo(graph);
+
     </script>
 </body>
 </html>`;
