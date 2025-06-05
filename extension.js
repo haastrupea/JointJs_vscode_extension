@@ -90,6 +90,7 @@ function getWebviewContent() {
                 graph.fromJSON(json);
             }
         });
+
     </script>
 </body>
 </html>`;

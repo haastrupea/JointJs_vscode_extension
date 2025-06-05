@@ -6,6 +6,7 @@ This is the README for your extension "joint-js". After writing up a brief descr
 
 * **JointJS Preview** - Run the `Show JointJS Preview` command to open a webview preview that updates automatically as you edit the file.
 
+
 For example if there is an image subfolder under your extension project workspace:
 
 \!\[feature X\]\(images/feature-x.png\)
