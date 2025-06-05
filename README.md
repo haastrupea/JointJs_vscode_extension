@@ -4,7 +4,7 @@ This is the README for your extension "joint-js". After writing up a brief descr
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+* **JointJS Preview** - Run the `Show JointJS Preview` command to open a webview displaying a sample JointJS diagram.
 
 For example if there is an image subfolder under your extension project workspace:
 
